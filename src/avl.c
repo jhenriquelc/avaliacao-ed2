@@ -2,21 +2,23 @@
 
 Membros do grupo:
 - João Henrique Linhares Corrêa: 256446
-- Marcelo Henrique Guidini Angeli: 2564530 
+- Marcelo Henrique Guidini Angeli: 2564530
 - Pedro Henrique Sauné: 2564572
 
 Entrega 1
 */
 
+#include <errno.h>
 #include <stdbool.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <errno.h>
 
 typedef struct node {
     struct node* esq;
     struct node* dir;
-    long int valor
+    long int valor;
+    size_t altura;
 } Node;
 
 // insere o valor na estrutura, balanceando conforme necessário.
@@ -25,7 +27,8 @@ Node* inserir(Node* raiz, long valor);
 // Roda free() em todos os nós alocados.
 void deletar(Node* raiz);
 
-// Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo: direita).
+// Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo:
+// direita).
 int balanco(Node* raiz);
 
 // Executa uma rotação simples à esquerda.
@@ -67,13 +70,14 @@ int main(int argc, char* argv[]) {
 
     while (proximo(&entrada)) {
 
-        if (entrada = 0) {
-            printf("Bal=%d", balanco(avl));
+        if (entrada == 0) {
+            printf("Bal=%d\n", balanco(avl));
             deletar(avl);
+            avl = NULL;
             continue;
         }
 
-        inserir(avl, entrada);
+        avl = inserir(avl, entrada);
     }
 
     exit(EXIT_SUCCESS);
