@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "ctype.h": "c"
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/joaoh/Projetos/avaliação-ed2/out",
+            "binaryPath": "/home/joaoh/Projetos/avaliação-ed2/out/avl",
+            "binaryArgs": []
+        }
+    ],
+    "C_Cpp.loggingLevel": "Warning"
+}

@@ -1,0 +1,68 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/out/avl",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb",
+                "program": "${workspaceFolder}/out/avl"
+            },
+            "osx": {
+                "MIMode": "lldb",
+                "miDebuggerPath": "lldb-mi",
+                "program": "${workspaceFolder}/out/avl"
+            },
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb.exe",
+                "program": "${workspaceFolder}/out/avl.exe"
+            },
+            "preLaunchTask": "build",
+            "postDebugTask": "clean"
+        },
+        {
+            "name": "Debug com Argumentos",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceRoot}/out/avl",
+            "args": ["${input:argumentos}"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "linux": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb",
+                "program": "${workspaceRoot}/out/avl"
+            },
+            "osx": {
+                "MIMode": "lldb",
+                "miDebuggerPath": "lldb-mi",
+                "program": "${workspaceRoot}/out/avl"
+            },
+            "windows": {
+                "MIMode": "gdb",
+                "miDebuggerPath": "gdb.exe",
+                "program": "${workspaceFolder}/out/avl.exe"
+            },
+            "preLaunchTask": "build",
+            "postDebugTask": "clean"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "argumentos",
+            "type": "promptString",
+            "description": "Quais os argumentos para rodar?"
+        }
+    ]
+}
