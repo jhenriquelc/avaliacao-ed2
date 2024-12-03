@@ -29,7 +29,12 @@ void deletar(Node* raiz);
 
 // Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo:
 // direita).
-int balanco(Node* raiz);
+int balanco(Node* raiz) {
+    if (raiz == NULL)
+        return 0;
+    return (int)((raiz->dir != NULL ? raiz->dir->altura : 0) -
+                 (raiz->esq != NULL ? raiz->esq->altura : 0));
+};
 
 // Executa uma rotação simples à esquerda.
 Node* rse(Node* pivo);
