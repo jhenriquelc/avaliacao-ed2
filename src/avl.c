@@ -5,7 +5,6 @@ Membros do grupo:
 - Marcelo Henrique Guidini Angeli: 2564530
 - Pedro Henrique Sauné: 2564572
 
-Entrega 1
 */
 
 #include <errno.h>
