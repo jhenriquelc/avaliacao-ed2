@@ -20,8 +20,22 @@ typedef struct node {
     size_t altura;
 } Node;
 
-// insere o valor na estrutura, balanceando conforme necessário.
-Node* inserir(Node* raiz, long valor);
+// Obtem a altura de um nó.
+size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
+
+// Inicializa uma nova folha alocada na heap.
+Node* novo_node(long valor) {
+    Node* node = (Node*)malloc(sizeof(Node));
+    if (node == NULL) {
+        perror("avl");
+        exit(EXIT_FAILURE);
+    }
+    node->esq = NULL;
+    node->dir = NULL;
+    node->valor = valor;
+    node->altura = 1;
+    return node;
+}
 
 // Roda free() em todos os nós alocados.
 void deletar(Node* raiz);
@@ -31,8 +45,7 @@ void deletar(Node* raiz);
 int balanco(Node* raiz) {
     if (raiz == NULL)
         return 0;
-    return (int)((raiz->dir != NULL ? raiz->dir->altura : 0) -
-                 (raiz->esq != NULL ? raiz->esq->altura : 0));
+    return (int)(altura(raiz->dir) - (altura(raiz->esq)));
 };
 
 // Executa uma rotação simples à esquerda.
@@ -46,6 +59,33 @@ Node* rde(Node* pivo);
 
 // Executa uma rotação dupla à direita.
 Node* rdd(Node* pivo);
+
+// Seleciona o algoritmo correto para o balanceamento e o executa.
+Node* balancear(Node* raiz);
+
+// Insere o valor na estrutura, balanceando conforme necessário.
+Node* inserir(Node* raiz, long valor) {
+
+    // inserir
+    if (raiz == NULL) {
+        return novo_node(valor);
+    }
+    if (valor < raiz->valor) {
+        raiz->esq = inserir(raiz->esq, valor);
+    } else {
+        raiz->dir = inserir(raiz->dir, valor);
+    }
+
+    // ajustar altura
+    size_t maior_altura_subarvore = maior(altura(raiz->esq), altura(raiz->dir));
+    raiz->altura = maior_altura_subarvore + 1;
+
+    // balancear se necessário
+    if (abs(balanco(raiz)) > 1)
+        raiz = balancear(raiz);
+
+    return raiz;
+};
 
 // Coloca o próximo valor inserido em *valor_var, se houver;
 // Indica se há próximo no booleano de retorno;
