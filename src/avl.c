@@ -8,6 +8,7 @@ Membros do grupo:
 */
 
 #include <errno.h>
+#include <locale.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -149,6 +150,7 @@ bool proximo(int* valor_var) {
 
 // Rotina principal
 int main(int argc, char* argv[]) {
+    setlocale(LC_ALL, "Portuguese");
 
     Node* avl = NULL;
     int entrada;
