@@ -165,5 +165,6 @@ int main(int argc, char* argv[]) {
         avl = inserir(avl, entrada);
     }
 
+    printf("fim\n");
     exit(EXIT_SUCCESS);
 }
