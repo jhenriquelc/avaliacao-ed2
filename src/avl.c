@@ -22,6 +22,8 @@ typedef struct node {
 // Obtem a altura de um nó.
 size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
 
+size_t maior(size_t a, size_t b){ return a>b ? a : b; }
+
 // Inicializa uma nova folha alocada na heap.
 Node* novo_node(long valor) {
     Node* node = (Node*)malloc(sizeof(Node));
@@ -45,9 +47,9 @@ void deletar(Node* raiz) {
         deletar(raiz->esq);
     if (raiz->dir != NULL)
         deletar(raiz->dir);
-    
+
     free(raiz);
-    
+
     return;
 };
 
