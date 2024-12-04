@@ -149,7 +149,7 @@ bool proximo(int* valor_var) {
 }
 
 // Rotina principal
-int main(int argc, char* argv[]) {
+int main() {
     setlocale(LC_ALL, "Portuguese");
 
     Node* avl = NULL;
