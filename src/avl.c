@@ -22,7 +22,7 @@ typedef struct node {
 // Obtem a altura de um nó.
 size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
 
-size_t maior(size_t a, size_t b){ return a>b ? a : b; }
+size_t maior(size_t a, size_t b) { return a > b ? a : b; }
 
 // Inicializa uma nova folha alocada na heap.
 Node* novo_node(long valor) {
@@ -62,36 +62,36 @@ int balanco(Node* raiz) {
 };
 
 // Executa uma rotação simples à esquerda.
-Node* rse(Node* pivo){
-    if (pivo == NULL){
+Node* rse(Node* pivo) {
+    if (pivo == NULL) {
         fprintf(stderr, "avl: NULL passado para 'rse'. Parando...\n");
         exit(EXIT_FAILURE);
     }
-    Node* dir_pivo = pivo -> dir;
-    if (dir_pivo == NULL){
+    Node* dir_pivo = pivo->dir;
+    if (dir_pivo == NULL) {
         fprintf(stderr, "avl: rse inválido. Parando...\n");
         exit(EXIT_FAILURE);
     }
-    Node* esq_dir_pivo = dir_pivo -> esq;
-    dir_pivo -> esq = pivo;
-    pivo -> dir = esq_dir_pivo;
+    Node* esq_dir_pivo = dir_pivo->esq;
+    dir_pivo->esq = pivo;
+    pivo->dir = esq_dir_pivo;
     return dir_pivo;
 }
 
 // Executa uma rotação simples à direita.
-Node* rsd(Node* pivo){
-    if (pivo == NULL){
+Node* rsd(Node* pivo) {
+    if (pivo == NULL) {
         fprintf(stderr, "avl: NULL passado para 'rsd'. Parando...\n");
         exit(EXIT_FAILURE);
     }
-    Node* esq_pivo = pivo -> esq;
-    if (esq_pivo == NULL){
+    Node* esq_pivo = pivo->esq;
+    if (esq_pivo == NULL) {
         fprintf(stderr, "avl: rsd inválido. Parando...\n");
         exit(EXIT_FAILURE);
     }
-    Node* dir_esq_pivo = esq_pivo -> dir;
-    esq_pivo -> dir = pivo;
-    pivo -> esq = dir_esq_pivo;
+    Node* dir_esq_pivo = esq_pivo->dir;
+    esq_pivo->dir = pivo;
+    pivo->esq = dir_esq_pivo;
     return esq_pivo;
 }
 
