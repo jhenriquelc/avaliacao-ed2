@@ -37,7 +37,19 @@ Node* novo_node(long valor) {
 }
 
 // Roda free() em todos os nós alocados.
-void deletar(Node* raiz);
+void deletar(Node* raiz) {
+    if (raiz == NULL)
+        return;
+
+    if (raiz->esq != NULL)
+        deletar(raiz->esq);
+    if (raiz->dir != NULL)
+        deletar(raiz->dir);
+    
+    free(raiz);
+    
+    return;
+};
 
 // Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo:
 // direita).
