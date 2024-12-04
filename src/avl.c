@@ -10,7 +10,6 @@ Entrega 1
 
 #include <errno.h>
 #include <stdbool.h>
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
