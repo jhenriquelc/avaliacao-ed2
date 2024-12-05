@@ -177,14 +177,14 @@ Node* balancear(Node* raiz, Direcao inseriu_em){
     Node* filho = (inseriu_em == DIREITA ? raiz -> dir : raiz -> esq);
     int produto = balanco(raiz) * balanco(filho);
 
-    // se o produto for maior que 0 (sinal igual), rotação simples na direção inseriu_em
+    // se o produto for maior que 0 (sinal igual), rotação simples na direção oposta a inseriu_em
     if (produto > 0){
-        return (inseriu_em == DIREITA ? rsd(raiz) : rse(raiz));
+        return (inseriu_em == ESQUERDA ? rsd(raiz) : rse(raiz));
     }
 
-    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção inseriu_em
+    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção oposta a inseriu_em
     if (produto < 0){
-        return (inseriu_em == DIREITA ? rdd(raiz) : rde(raiz));
+        return (inseriu_em == ESQUERDA ? rdd(raiz) : rde(raiz));
     }
 
     // se o produto for 0 já está balanceado
