@@ -13,6 +13,11 @@ Membros do grupo:
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef enum direcao {
+    DIREITA,
+    ESQUERDA
+} Direcao;
+
 typedef struct node {
     struct node* esq;
     struct node* dir;
@@ -164,7 +169,12 @@ Node* rdd(Node* pivo){
 }
 
 // Seleciona o algoritmo correto para o balanceamento e o executa.
-Node* balancear(Node* raiz);
+Node* balancear(Node* raiz, Direcao inseriu_em){
+    // checar balanço de raiz -> inseriu_em e balanço da raiz
+    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção inseriu_em
+    // se o produto for maior que 0 (sinal igual), rotação simples na direção inseriu_em
+    // se o produto for 0 já está balanceado
+}
 
 // Insere o valor na estrutura, balanceando conforme necessário.
 Node* inserir(Node* raiz, long valor) {
@@ -173,10 +183,13 @@ Node* inserir(Node* raiz, long valor) {
     if (raiz == NULL) {
         return novo_node(valor);
     }
+    Direcao inseriu_em;
     if (valor < raiz->valor) {
         raiz->esq = inserir(raiz->esq, valor);
+        inseriu_em = ESQUERDA;
     } else {
         raiz->dir = inserir(raiz->dir, valor);
+        inseriu_em = DIREITA;
     }
 
     // ajustar altura
@@ -185,7 +198,8 @@ Node* inserir(Node* raiz, long valor) {
 
     // balancear se necessário
     if (abs(balanco(raiz)) > 1)
-        raiz = balancear(raiz);
+        // passando como argumento a direção da inserção
+        raiz = balancear(raiz, inseriu_em);
 
     return raiz;
 };
