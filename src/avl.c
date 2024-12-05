@@ -75,6 +75,7 @@ Node* rse(Node* pivo) {
         fprintf(stderr, "avl: NULL passado para 'rse'. Parando...\n");
         exit(EXIT_FAILURE);
     }
+    printf("RSE %ld\n", pivo -> valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         fprintf(stderr, "avl: rse inválido. Parando...\n");
@@ -94,6 +95,7 @@ Node* rsd(Node* pivo) {
         fprintf(stderr, "avl: NULL passado para 'rsd'. Parando...\n");
         exit(EXIT_FAILURE);
     }
+    printf("RSD %ld\n", pivo -> valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         fprintf(stderr, "avl: rsd inválido. Parando...\n");
@@ -113,6 +115,7 @@ Node* rde(Node* pivo){
         fprintf(stderr, "avl: NULL passado para 'rde'. Parando...\n");
         exit(EXIT_FAILURE);
     }
+    printf("RDE %ld\n", pivo -> valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         fprintf(stderr, "avl: rde inválido. Parando...\n");
@@ -139,6 +142,7 @@ Node* rdd(Node* pivo){
         fprintf(stderr, "avl: NULL passado para 'rdd'. Parando...\n");
         exit(EXIT_FAILURE);
     }
+    printf("RDD %ld\n", pivo -> valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         fprintf(stderr, "avl: rdd inválido. Parando...\n");
