@@ -193,8 +193,7 @@ Node* inserir(Node* raiz, long valor) {
     }
 
     // ajustar altura
-    size_t maior_altura_subarvore = maior(altura(raiz->esq), altura(raiz->dir));
-    raiz->altura = maior_altura_subarvore + 1;
+    arrumar_altura(raiz);
 
     // balancear se necessário
     if (abs(balanco(raiz)) > 1)
