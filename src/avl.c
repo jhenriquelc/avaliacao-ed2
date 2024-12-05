@@ -15,7 +15,7 @@ Membros do grupo:
 
 typedef enum direcao {
     DIREITA,
-    ESQUERDA
+    ESQUERDA,
 } Direcao;
 
 typedef struct node {
@@ -26,7 +26,7 @@ typedef struct node {
 } Node;
 
 // Formata uma string de erro, printa no stderr, e fecha (mata) o programa.
-void morrer(char* mensagem){
+void morrer(char* mensagem) {
     fprintf(stderr, "avl: %s. Parando...\n", mensagem);
     exit(EXIT_FAILURE);
 }
@@ -36,11 +36,11 @@ size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
 
 size_t maior(size_t a, size_t b) { return a > b ? a : b; }
 
-void arrumar_altura(Node* no){
-    if (no==NULL){
+void arrumar_altura(Node* no) {
+    if (no == NULL) {
         return;
     }
-    no -> altura = maior(altura(no -> dir), altura(no -> esq)) +1;
+    no->altura = maior(altura(no->dir), altura(no->esq)) + 1;
 }
 
 // Inicializa uma nova folha alocada na heap.
@@ -85,7 +85,7 @@ Node* rse(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rse'");
     }
-    printf("RSE %ld\n", pivo -> valor);
+    printf("RSE %ld\n", pivo->valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         morrer("rse inválido");
@@ -103,7 +103,7 @@ Node* rsd(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rsd'");
     }
-    printf("RSD %ld\n", pivo -> valor);
+    printf("RSD %ld\n", pivo->valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         morrer("rsd inválido");
@@ -117,23 +117,23 @@ Node* rsd(Node* pivo) {
 }
 
 // Executa uma rotação dupla à esquerda.
-Node* rde(Node* pivo){
+Node* rde(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rde'");
     }
-    printf("RDE %ld\n", pivo -> valor);
+    printf("RDE %ld\n", pivo->valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         morrer("rde inválido");
     }
-    Node* esq_dir_pivo = dir_pivo -> esq;
-    if (esq_dir_pivo == NULL){
+    Node* esq_dir_pivo = dir_pivo->esq;
+    if (esq_dir_pivo == NULL) {
         morrer("rde inválido");
     }
-    pivo -> dir = esq_dir_pivo -> esq;
-    dir_pivo -> esq = esq_dir_pivo -> dir;
-    esq_dir_pivo -> dir = dir_pivo;
-    esq_dir_pivo -> esq = pivo;
+    pivo->dir = esq_dir_pivo->esq;
+    dir_pivo->esq = esq_dir_pivo->dir;
+    esq_dir_pivo->dir = dir_pivo;
+    esq_dir_pivo->esq = pivo;
     arrumar_altura(pivo);
     arrumar_altura(dir_pivo);
     arrumar_altura(esq_dir_pivo);
@@ -141,23 +141,23 @@ Node* rde(Node* pivo){
 }
 
 // Executa uma rotação dupla à direita.
-Node* rdd(Node* pivo){
+Node* rdd(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rdd'");
     }
-    printf("RDD %ld\n", pivo -> valor);
+    printf("RDD %ld\n", pivo->valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         morrer("rdd inválido");
     }
-    Node* dir_esq_pivo = esq_pivo -> dir;
-    if (dir_esq_pivo == NULL){
+    Node* dir_esq_pivo = esq_pivo->dir;
+    if (dir_esq_pivo == NULL) {
         morrer("rdd inválido");
     }
-    pivo -> esq = dir_esq_pivo -> dir;
-    esq_pivo -> dir = dir_esq_pivo -> esq;
-    dir_esq_pivo -> esq = esq_pivo;
-    dir_esq_pivo -> dir = pivo;
+    pivo->esq = dir_esq_pivo->dir;
+    esq_pivo->dir = dir_esq_pivo->esq;
+    dir_esq_pivo->esq = esq_pivo;
+    dir_esq_pivo->dir = pivo;
     arrumar_altura(pivo);
     arrumar_altura(esq_pivo);
     arrumar_altura(dir_esq_pivo);
@@ -165,27 +165,29 @@ Node* rdd(Node* pivo){
 }
 
 // Seleciona o algoritmo correto para o balanceamento e o executa.
-Node* balancear(Node* raiz, Direcao inseriu_em){
-    if (raiz==NULL){
+Node* balancear(Node* raiz, Direcao inseriu_em) {
+    if (raiz == NULL) {
         return raiz;
     }
-    // checar balanço de raiz -> inseriu_em e balanço da raiz, calculando seu produto
-    Node* filho = (inseriu_em == DIREITA ? raiz -> dir : raiz -> esq);
+    // checar balanço de raiz -> inseriu_em e balanço da raiz, calculando seu
+    // produto
+    Node* filho = (inseriu_em == DIREITA ? raiz->dir : raiz->esq);
     int produto = balanco(raiz) * balanco(filho);
 
-    // se o produto for maior que 0 (sinal igual), rotação simples na direção oposta a inseriu_em
-    if (produto > 0){
+    // se o produto for maior que 0 (sinal igual), rotação simples na direção
+    // oposta a inseriu_em
+    if (produto > 0) {
         return (inseriu_em == ESQUERDA ? rsd(raiz) : rse(raiz));
     }
 
-    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção oposta a inseriu_em
-    if (produto < 0){
+    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção
+    // oposta a inseriu_em
+    if (produto < 0) {
         return (inseriu_em == ESQUERDA ? rdd(raiz) : rde(raiz));
     }
 
     // se o produto for 0 já está balanceado
     return raiz;
-        
 }
 
 // Insere o valor na estrutura, balanceando conforme necessário.
