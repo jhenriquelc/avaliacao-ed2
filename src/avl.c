@@ -76,6 +76,8 @@ Node* rse(Node* pivo) {
     Node* esq_dir_pivo = dir_pivo->esq;
     dir_pivo->esq = pivo;
     pivo->dir = esq_dir_pivo;
+    pivo -> altura = maior(altura(pivo -> esq), altura(dir_pivo)) + 1;
+    dir_pivo -> altura = maior(altura(dir_pivo -> dir), altura(esq_dir_pivo)) + 1;
     return dir_pivo;
 }
 
@@ -93,6 +95,8 @@ Node* rsd(Node* pivo) {
     Node* dir_esq_pivo = esq_pivo->dir;
     esq_pivo->dir = pivo;
     pivo->esq = dir_esq_pivo;
+    pivo -> altura = maior(altura(pivo -> dir), altura(esq_pivo)) + 1;
+    esq_pivo -> altura = maior(altura(esq_pivo -> esq), altura(dir_esq_pivo)) + 1;
     return esq_pivo;
 }
 
