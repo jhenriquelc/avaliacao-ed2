@@ -237,7 +237,7 @@ bool proximo(int* valor_var) {
         // valor definido como valor de saída pelo professor.
         return *valor_var != -1;
     }
-    return 0;
+    return false;
 }
 
 // Rotina principal
