@@ -21,7 +21,7 @@ typedef enum direcao {
 typedef struct node {
     struct node* esq;
     struct node* dir;
-    long int valor;
+    long valor;
     size_t altura;
 } Node;
 
@@ -220,10 +220,10 @@ Node* inserir(Node* raiz, long valor) {
 // Coloca o próximo valor inserido em *valor_var, se houver;
 // Indica se há próximo no booleano de retorno;
 // Em caso de erros, encerra o programa.
-bool proximo(int* valor_var) {
+bool proximo(long* valor_var) {
     errno = 0;
     int matches;
-    while ((matches = scanf("%d", valor_var)) != EOF) {
+    while ((matches = scanf("%ld", valor_var)) != EOF) {
         if (matches < 0) {
             if (errno == EAGAIN || errno == EWOULDBLOCK)
                 continue;
@@ -245,7 +245,7 @@ int main() {
     setlocale(LC_ALL, "Portuguese");
 
     Node* avl = NULL;
-    int entrada;
+    long entrada;
 
     while (proximo(&entrada)) {
 
