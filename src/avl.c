@@ -219,7 +219,7 @@ int main() {
     while (proximo(&entrada)) {
 
         if (entrada == 0) {
-            printf("Bal=%d\n", balanco(avl));
+            printf("Bal = %d\n", balanco(avl));
             deletar(avl);
             avl = NULL;
             continue;
