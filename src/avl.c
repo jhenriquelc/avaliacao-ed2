@@ -108,10 +108,56 @@ Node* rsd(Node* pivo) {
 }
 
 // Executa uma rotação dupla à esquerda.
-Node* rde(Node* pivo);
+Node* rde(Node* pivo){
+    if (pivo == NULL) {
+        fprintf(stderr, "avl: NULL passado para 'rde'. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    Node* dir_pivo = pivo->dir;
+    if (dir_pivo == NULL) {
+        fprintf(stderr, "avl: rde inválido. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    Node* esq_dir_pivo = dir_pivo -> esq;
+    if (esq_dir_pivo == NULL){
+        fprintf(stderr, "avl: rde inválido. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    pivo -> dir = esq_dir_pivo -> esq;
+    dir_pivo -> esq = esq_dir_pivo -> dir;
+    esq_dir_pivo -> dir = dir_pivo;
+    esq_dir_pivo -> esq = pivo;
+    arrumar_altura(pivo);
+    arrumar_altura(dir_pivo);
+    arrumar_altura(esq_dir_pivo);
+    return esq_dir_pivo;
+}
 
 // Executa uma rotação dupla à direita.
-Node* rdd(Node* pivo);
+Node* rdd(Node* pivo){
+    if (pivo == NULL) {
+        fprintf(stderr, "avl: NULL passado para 'rdd'. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    Node* esq_pivo = pivo->esq;
+    if (esq_pivo == NULL) {
+        fprintf(stderr, "avl: rdd inválido. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    Node* dir_esq_pivo = esq_pivo -> dir;
+    if (dir_esq_pivo == NULL){
+        fprintf(stderr, "avl: rdd inválido. Parando...\n");
+        exit(EXIT_FAILURE);
+    }
+    pivo -> esq = dir_esq_pivo -> dir;
+    esq_pivo -> dir = dir_esq_pivo -> esq;
+    dir_esq_pivo -> esq = esq_pivo;
+    dir_esq_pivo -> dir = pivo;
+    arrumar_altura(pivo);
+    arrumar_altura(esq_pivo);
+    arrumar_altura(dir_esq_pivo);
+    return dir_esq_pivo;
+}
 
 // Seleciona o algoritmo correto para o balanceamento e o executa.
 Node* balancear(Node* raiz);
