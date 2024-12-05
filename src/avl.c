@@ -25,6 +25,12 @@ typedef struct node {
     size_t altura;
 } Node;
 
+// Formata uma string de erro, printa no stderr, e fecha (mata) o programa.
+void morrer(char* mensagem){
+    fprintf(stderr, "avl: %s. Parando...\n", mensagem);
+    exit(EXIT_FAILURE);
+}
+
 // Obtem a altura de um nó.
 size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
 
@@ -77,14 +83,12 @@ int balanco(Node* raiz) {
 // Executa uma rotação simples à esquerda.
 Node* rse(Node* pivo) {
     if (pivo == NULL) {
-        fprintf(stderr, "avl: NULL passado para 'rse'. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("NULL passado para 'rse'");
     }
     printf("RSE %ld\n", pivo -> valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
-        fprintf(stderr, "avl: rse inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rse inválido");
     }
     Node* esq_dir_pivo = dir_pivo->esq;
     dir_pivo->esq = pivo;
@@ -97,14 +101,12 @@ Node* rse(Node* pivo) {
 // Executa uma rotação simples à direita.
 Node* rsd(Node* pivo) {
     if (pivo == NULL) {
-        fprintf(stderr, "avl: NULL passado para 'rsd'. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("NULL passado para 'rsd'");
     }
     printf("RSD %ld\n", pivo -> valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
-        fprintf(stderr, "avl: rsd inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rsd inválido");
     }
     Node* dir_esq_pivo = esq_pivo->dir;
     esq_pivo->dir = pivo;
@@ -117,19 +119,16 @@ Node* rsd(Node* pivo) {
 // Executa uma rotação dupla à esquerda.
 Node* rde(Node* pivo){
     if (pivo == NULL) {
-        fprintf(stderr, "avl: NULL passado para 'rde'. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("NULL passado para 'rde'");
     }
     printf("RDE %ld\n", pivo -> valor);
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
-        fprintf(stderr, "avl: rde inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rde inválido");
     }
     Node* esq_dir_pivo = dir_pivo -> esq;
     if (esq_dir_pivo == NULL){
-        fprintf(stderr, "avl: rde inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rde inválido");
     }
     pivo -> dir = esq_dir_pivo -> esq;
     dir_pivo -> esq = esq_dir_pivo -> dir;
@@ -144,19 +143,16 @@ Node* rde(Node* pivo){
 // Executa uma rotação dupla à direita.
 Node* rdd(Node* pivo){
     if (pivo == NULL) {
-        fprintf(stderr, "avl: NULL passado para 'rdd'. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("NULL passado para 'rdd'");
     }
     printf("RDD %ld\n", pivo -> valor);
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
-        fprintf(stderr, "avl: rdd inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rdd inválido");
     }
     Node* dir_esq_pivo = esq_pivo -> dir;
     if (dir_esq_pivo == NULL){
-        fprintf(stderr, "avl: rdd inválido. Parando...\n");
-        exit(EXIT_FAILURE);
+        morrer("rdd inválido");
     }
     pivo -> esq = dir_esq_pivo -> dir;
     esq_pivo -> dir = dir_esq_pivo -> esq;
@@ -233,8 +229,7 @@ bool proximo(int* valor_var) {
             exit(EXIT_FAILURE);
         }
         if (matches == 0) {
-            fprintf(stderr, "avl: entrada inválida (não é número). Parando...\n");
-            exit(EXIT_FAILURE);
+            morrer("entrada inválida (não é número)");
         }
 
         return *valor_var != -1;
