@@ -227,9 +227,13 @@ bool proximo(int* valor_var) {
     int matches;
     while ((matches = scanf("%d", valor_var)) != EOF) {
         if (matches < 0) {
-            if (errno == EAGAIN)
+            if (errno == EAGAIN || errno == EWOULDBLOCK)
                 continue;
             perror("avl");
+            exit(EXIT_FAILURE);
+        }
+        if (matches == 0) {
+            fprintf(stderr, "avl: entrada inválida (não é número). Parando...\n");
             exit(EXIT_FAILURE);
         }
 
