@@ -64,7 +64,7 @@ void deletar(Node* raiz) {
     free(raiz);
 
     return;
-};
+}
 
 // Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo:
 // direita).
@@ -72,7 +72,7 @@ int balanco(Node* raiz) {
     if (raiz == NULL)
         return 0;
     return (int)(altura(raiz->dir) - (altura(raiz->esq)));
-};
+}
 
 // Executa uma rotação simples à esquerda.
 Node* rse(Node* pivo) {
@@ -217,7 +217,7 @@ Node* inserir(Node* raiz, long valor) {
         raiz = balancear(raiz, inseriu_em);
 
     return raiz;
-};
+}
 
 // Coloca o próximo valor inserido em *valor_var, se houver;
 // Indica se há próximo no booleano de retorno;
