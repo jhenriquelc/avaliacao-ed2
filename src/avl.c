@@ -72,8 +72,8 @@ void deletar(Node* raiz) {
     return;
 }
 
-// Obtêm a diferença entre alturas das subárvores (negativo: esquerda; positivo:
-// direita).
+// Obtêm a diferença entre alturas das subárvores
+// (negativo: esquerda; positivo: direita).
 int balanco(Node* raiz) {
     if (raiz == NULL)
         return 0;
@@ -169,19 +169,19 @@ Node* balancear(Node* raiz, Direcao inseriu_em) {
     if (raiz == NULL) {
         return raiz;
     }
-    // checar balanço de raiz -> inseriu_em e balanço da raiz, calculando seu
-    // produto
+    // checar balanço de raiz -> inseriu_em e balanço da raiz,
+    // calculando seu produto
     Node* filho = (inseriu_em == DIREITA ? raiz->dir : raiz->esq);
     int produto = balanco(raiz) * balanco(filho);
 
-    // se o produto for maior que 0 (sinal igual), rotação simples na direção
-    // oposta a inseriu_em
+    // se o produto for maior que 0 (sinal igual),
+    // rotação simples na direção oposta a inseriu_em
     if (produto > 0) {
         return (inseriu_em == ESQUERDA ? rsd(raiz) : rse(raiz));
     }
 
-    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção
-    // oposta a inseriu_em
+    // se o produto for menor que 0 (sinal oposto)
+    // rotação dupla na direção oposta a inseriu_em
     if (produto < 0) {
         return (inseriu_em == ESQUERDA ? rdd(raiz) : rde(raiz));
     }
