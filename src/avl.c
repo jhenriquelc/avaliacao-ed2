@@ -234,6 +234,7 @@ bool proximo(int* valor_var) {
             morrer("entrada inválida (não é número)");
         }
 
+        // valor definido como valor de saída pelo professor.
         return *valor_var != -1;
     }
     return 0;
@@ -248,6 +249,7 @@ int main() {
 
     while (proximo(&entrada)) {
 
+        // valor definido como valor para excluir árvore pelo professor.
         if (entrada == 0) {
             printf("Bal = %d\n", balanco(avl));
             deletar(avl);
