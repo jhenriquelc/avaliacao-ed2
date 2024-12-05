@@ -170,10 +170,26 @@ Node* rdd(Node* pivo){
 
 // Seleciona o algoritmo correto para o balanceamento e o executa.
 Node* balancear(Node* raiz, Direcao inseriu_em){
-    // checar balanço de raiz -> inseriu_em e balanço da raiz
-    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção inseriu_em
+    if (raiz==NULL){
+        return raiz;
+    }
+    // checar balanço de raiz -> inseriu_em e balanço da raiz, calculando seu produto
+    Node* filho = (inseriu_em == DIREITA ? raiz -> dir : raiz -> esq);
+    int produto = balanco(raiz) * balanco(filho);
+
     // se o produto for maior que 0 (sinal igual), rotação simples na direção inseriu_em
+    if (produto > 0){
+        return (inseriu_em == DIREITA ? rsd(raiz) : rse(raiz));
+    }
+
+    // se o produto for menor que 0 (sinal oposto), rotação dupla na direção inseriu_em
+    if (produto < 0){
+        return (inseriu_em == DIREITA ? rdd(raiz) : rde(raiz));
+    }
+
     // se o produto for 0 já está balanceado
+    return raiz;
+        
 }
 
 // Insere o valor na estrutura, balanceando conforme necessário.
