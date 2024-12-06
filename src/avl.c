@@ -62,10 +62,8 @@ void deletar(Node* raiz) {
     if (raiz == NULL)
         return;
 
-    if (raiz->esq != NULL)
-        deletar(raiz->esq);
-    if (raiz->dir != NULL)
-        deletar(raiz->dir);
+    deletar(raiz->esq);
+    deletar(raiz->dir);
 
     free(raiz);
 
