@@ -13,11 +13,13 @@ Membros do grupo:
 #include <stdio.h>
 #include <stdlib.h>
 
+// Enumeração para direção de inserção.
 typedef enum direcao {
     DIREITA,
     ESQUERDA,
 } Direcao;
 
+// Estrutura de um nó da árvore AVL.
 typedef struct node {
     struct node* esq;
     struct node* dir;
@@ -36,6 +38,7 @@ size_t altura(Node* no) { return no != NULL ? no->altura : 0; }
 
 size_t maior(size_t a, size_t b) { return a > b ? a : b; }
 
+// Arruma a altura de um nó baseado na altura de seus filhos.
 void arrumar_altura(Node* no) {
     if (no == NULL) {
         return;
@@ -83,16 +86,21 @@ Node* rse(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rse'");
     }
-    printf("RSE %ld\n", pivo->valor);
+
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         morrer("rse inválido");
     }
+
+    printf("RSE %ld\n", pivo->valor);
+
     Node* esq_dir_pivo = dir_pivo->esq;
     dir_pivo->esq = pivo;
     pivo->dir = esq_dir_pivo;
+
     arrumar_altura(pivo);
     arrumar_altura(dir_pivo);
+
     return dir_pivo;
 }
 
@@ -101,16 +109,21 @@ Node* rsd(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rsd'");
     }
-    printf("RSD %ld\n", pivo->valor);
+
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         morrer("rsd inválido");
     }
+
+    printf("RSD %ld\n", pivo->valor);
+
     Node* dir_esq_pivo = esq_pivo->dir;
     esq_pivo->dir = pivo;
     pivo->esq = dir_esq_pivo;
+
     arrumar_altura(pivo);
     arrumar_altura(esq_pivo);
+
     return esq_pivo;
 }
 
@@ -119,22 +132,28 @@ Node* rde(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rde'");
     }
-    printf("RDE %ld\n", pivo->valor);
+
     Node* dir_pivo = pivo->dir;
     if (dir_pivo == NULL) {
         morrer("rde inválido");
     }
+
     Node* esq_dir_pivo = dir_pivo->esq;
     if (esq_dir_pivo == NULL) {
         morrer("rde inválido");
     }
+
+    printf("RDE %ld\n", pivo->valor);
+
     pivo->dir = esq_dir_pivo->esq;
     dir_pivo->esq = esq_dir_pivo->dir;
     esq_dir_pivo->dir = dir_pivo;
     esq_dir_pivo->esq = pivo;
+
     arrumar_altura(pivo);
     arrumar_altura(dir_pivo);
     arrumar_altura(esq_dir_pivo);
+
     return esq_dir_pivo;
 }
 
@@ -143,22 +162,28 @@ Node* rdd(Node* pivo) {
     if (pivo == NULL) {
         morrer("NULL passado para 'rdd'");
     }
-    printf("RDD %ld\n", pivo->valor);
+
     Node* esq_pivo = pivo->esq;
     if (esq_pivo == NULL) {
         morrer("rdd inválido");
     }
+
     Node* dir_esq_pivo = esq_pivo->dir;
     if (dir_esq_pivo == NULL) {
         morrer("rdd inválido");
     }
+
+    printf("RDD %ld\n", pivo->valor);
+
     pivo->esq = dir_esq_pivo->dir;
     esq_pivo->dir = dir_esq_pivo->esq;
     dir_esq_pivo->esq = esq_pivo;
     dir_esq_pivo->dir = pivo;
+
     arrumar_altura(pivo);
     arrumar_altura(esq_pivo);
     arrumar_altura(dir_esq_pivo);
+
     return dir_esq_pivo;
 }
 
@@ -188,7 +213,8 @@ Node* balancear(Node* raiz, Direcao inseriu_em) {
     return raiz;
 }
 
-// Insere o valor na estrutura, balanceando conforme necessário.
+// Insere o valor na estrutura, balanceando conforme necessário e ajustando as
+// alturas.
 Node* inserir(Node* raiz, long valor) {
 
     // inserir
@@ -204,7 +230,6 @@ Node* inserir(Node* raiz, long valor) {
         inseriu_em = DIREITA;
     }
 
-    // ajustar altura
     arrumar_altura(raiz);
 
     // balancear se necessário
@@ -228,6 +253,7 @@ bool proximo(long* valor_var) {
             perror("avl");
             exit(EXIT_FAILURE);
         }
+
         if (matches == 0) {
             morrer("entrada inválida (não é número)");
         }
