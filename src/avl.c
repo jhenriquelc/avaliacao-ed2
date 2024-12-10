@@ -5,6 +5,11 @@ Membros do grupo:
 - Marcelo Henrique Guidini Angeli: 2564530
 - Pedro Henrique Sauné: 2564572
 
+Testado nos SOs/compiladores:
+- Fedora 41 (x86_64) / gcc version 14.2.1 20240912 (Red Hat 14.2.1-3) (GCC)
+- Windows 11 (x86_64) / gcc version 14.2.0 (Rev2, Built by MSYS2 project)
+- Windows 11 (x86_64) / Microsoft (R) C/C++ Optimizing Compiler Versão 19.42.34435 para x64
+
 */
 
 #include <errno.h>
